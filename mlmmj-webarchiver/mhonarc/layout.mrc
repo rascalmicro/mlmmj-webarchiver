@@ -37,7 +37,7 @@
 </MSGPGBEGIN>
 
 <MSGPGEND>
-   <address>Archive administrator: postmaster@lists.cynapses.org</address>
+   <!-- FIXME <address>Archive administrator: postmaster@mlmmj-webarchiver</address> -->
   </div>
  </div>
 </body>
@@ -148,15 +148,16 @@
 </LISTBEGIN>
 
 <LITEMPLATE>
-<li><strong>$SUBJECT$</strong>
-<ul><li><em>From</em>: $FROM$</li></ul>
+<li><strong>$SUBJECT$</strong> $MSGLOCALDATE(CUR;%Y-%m-%d %H:%M)$
+<ul>
+<li><em>From</em>: $FROM$</li></ul>
 </li>
 </LITEMPLATE>
 
 <LISTEND>
 </ul>
 </div>
-   <address>Archive administrator: postmaster.cynapses.org</address>
+   <!-- FIXME <address>Archive administrator: postmaster@mlmmj-webarchiver</address> -->
   </div>
  </div>
 </LISTEND>
@@ -293,3 +294,14 @@
 </div>
 </SUBJECTHEADER>
 
+<!-- Thread element -->
+<!-- Add dates to every line in the thread view -->
+<TLiTxt>
+<li><strong>$SUBJECT$</strong>,
+<em>$FROMNAME$</em>, $MSGLOCALDATE(CUR;%Y-%m-%d %H:%M)$
+</TLiTxt>
+
+<TTopBegin>
+<li><strong>$SUBJECT$</strong>,
+<em>$FROMNAME$</em>, $MSGLOCALDATE(CUR;%Y-%m-%d %H:%M)$
+</TTopBegin>
