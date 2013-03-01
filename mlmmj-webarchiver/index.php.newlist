@@ -34,9 +34,9 @@ foreach($files as $k => $file) {
   <div id="topnav">
    <a href="/">home</a>
    |
-   <a href="../search.php">search</a>
-   |
    <a href="..">other lists</a>
+   |
+   <a href="search.php">search</a>
   </div>
  </div>
  <div id="mailinglists">

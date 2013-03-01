@@ -116,20 +116,21 @@ for wlist in $WEBARCHIVED_LISTS; do
         unset MLA_LABEL
         unset MHONARC_RC
         LIST_MHONARC_CMDS="$MHONARC_CMDS"
-
         if [ ! -d "${WEBARCHIVE_OUT}" ]; then
           mkdir -p -m ${DIRMODES} "${WEBARCHIVE_OUT}"
           if [ -n "${SKEL}" ]; then
             cp -r ${SKEL}/* ${WEBARCHIVE_OUT}/
           fi
         fi
-
         # check if list already has a webarchive directory and create one if not
         # also copy the new index into the dir, if one was given.
         if [ ! -d "${WEBARCHIVE_OUT}/${wlist}" ]; then
           mkdir -p -m ${DIRMODES} "${WEBARCHIVE_OUT}/${wlist}"
           if [ -n "$NEW_LIST_INDEX" ]; then
             cp ${NEW_LIST_INDEX} ${WEBARCHIVE_OUT}/${wlist}/index.php
+          fi
+          if [ -n "$NEW_LIST_SEARCH" ]; then
+            cat ${NEW_LIST_SEARCH} | perl -pe 's/##REL_LINK##/../g' | perl -pe "s/##MAX_RESULTS##/${MAX_RESULTS}/g" | perl -pe "s/##TITLE_LOCATION##/${wlist}/g" > ${WEBARCHIVE_OUT}/${wlist}/search.php
           fi
         fi
 
@@ -199,6 +200,9 @@ for wlist in $WEBARCHIVED_LISTS; do
 
             if [ ! -d "${WEBARCHIVE_OUT}/${wlist}/${THISMONTH}" ]; then
               mkdir -m ${DIRMODES} "${WEBARCHIVE_OUT}/${wlist}/${THISMONTH}"
+              if [ -n "$NEW_LIST_SEARCH" ]; then
+                cat ${NEW_LIST_SEARCH} | perl -pe 's/##REL_LINK##/..\/../g' | perl -pe "s/##MAX_RESULTS##/${MAX_RESULTS}/g" | perl -pe "s/##TITLE_LOCATION##/${wlist}\/${THISMONTH}/g" > ${WEBARCHIVE_OUT}/${wlist}/${THISMONTH}/search.php
+              fi
             fi
 
             $MHONARC $LIST_MHONARC_CMDS -outdir ${WEBARCHIVE_OUT}/${wlist}/${THISMONTH} -add < \
@@ -218,7 +222,7 @@ for wlist in $WEBARCHIVED_LISTS; do
 #               zip -9 -q -r -j "${WEBARCHIVE_OUT}/${wlist}/${wlist}-archive.zip" "${MLMMJ_LISTDIR}/${wlist}/archive"
 #       fi
 
-        WEBARCHIVE_OUT=${WEBARCHIVE_TMP}
+        #WEBARCHIVE_OUT=${WEBARCHIVE_TMP}  #Why?
 done
 
 rm /var/run/mlmmj-webarchiver.pid 2>/dev/null

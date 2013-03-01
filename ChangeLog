@@ -1,5 +1,10 @@
 mlmmj-webarchiver ChangeLog
 
+2013-02-28 - version 0.90
+  * Added search.php script
+  * Added date to every line
+  * Bugfixes
+
 2009-09-12 - version 0.80
   * Added MHonArc support and removed hypermail.
   * Added a nice style based on roundcube.net.

@@ -24,8 +24,6 @@
   </div>
   <div id="topnav">
    <a href="/">home</a>
-   |
-   <a href="search.php">search</a>
 <?php echo $navlists; ?>
   </div>
  </div>

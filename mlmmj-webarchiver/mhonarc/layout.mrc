@@ -30,6 +30,8 @@
    <a href="$TIDXFNAME$#$MSGNUM$">thread index</a>
    |
    <a href="$IDXFNAME$#$MSGNUM$">date index</a>
+   |
+   <a href="search.php">search</a>
   </div>
  </div>
  <div id="mailinglists">
@@ -138,6 +140,8 @@
    <a href="$TIDXFNAME$">thread index</a>
    |
    <a href="$IDXFNAME$">date index</a>
+   |
+   <a href="search.php">search</a>
   </div>
  </div>
  <div id="mailinglists">
@@ -189,6 +193,8 @@
    <a href="$TIDXFNAME$">thread index</a>
    |
    <a href="$IDXFNAME$">date index</a>
+   |
+   <a href="search.php">search</a>
   </div>
  </div>
  <div id="mailinglists">

@@ -1,0 +1,75 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html lang="en">
+<head>
+ <title>Mailing Lists Archives</title>
+ <link rel="stylesheet" type="text/css" media="screen" href="##REL_LINK##/style/screen.css">
+</head>
+<body>
+ <div id="banner">
+  <div id="header">
+   <div class="banner-left"><img src="##REL_LINK##/images/banner_left.gif" width="17" height="56" border="0" alt="" /></div>
+   <div class="banner-text">Mailing List Archives</a></div>
+   <div class="banner-right"><img src="##REL_LINK##/images/banner_right.gif" width="10" height="56" alt="" /></div>
+  </div>
+  <div id="topnav">
+   <a href="/">home</a>
+   |
+   <a href=".">archives</a>
+   |
+   <a href="<?php echo $_SERVER['PHP_SELF']; ?>">search</a>
+  </div>
+ </div>
+ <div id="mailinglists">
+  <div id="main">
+   <h1>search ##TITLE_LOCATION## (you can use POSIX regex)</h1>
+   <div class="listinfo">
+   <p>
+<?php
+	if (isset($_POST['words']) && !empty($_POST['words'])):
+		$words=str_replace("'","'\"'\"'",$_POST['words']);
+		$output=array();
+		$html=array();
+		$count=0;
+		$maxresults=##MAX_RESULTS##;
+		exec("find -type f -name '0*.html' | xargs egrep -roi '$words' | perl -pe 's/:.*//' | sort | uniq",&$output);
+		while(isset($output[$count]) && $count<$maxresults)
+		{
+			$file=$output[$count++];
+			$content=file_get_contents($file);
+			$matches=array();
+			if (preg_match('/<em>Subject<\/em>: ([^<]*)<\/li>[\S\s]+From<\/em>: ([^<]*)<\/li>[\S\s]+Date<\/em>: ([^<]*)<\/li>/',$content,&$matches))
+			{
+				$html[]="<li><a href='$file'>$matches[1]</a>, $matches[2], $matches[3]</li>";
+			}
+		}
+
+		if (count($html)==0)
+		{
+			echo "No results!";
+		}
+		else
+		{
+			if (count($output)>$maxresults)
+			{
+				echo "The first $maxresults results of ".count($output).":<br/>";
+			}
+			else
+			{
+				echo count($html)." results:";
+			}
+			echo "<ul>".implode($html)."</ul>";
+		}
+?>
+<?php	else:?>
+<form method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">
+<input type="text" size="30" name="words" value="">
+<input type="submit" value="Search">
+</form>
+<?php 	endif; ?>
+</p>
+
+   </div>
+  </div>
+ </div>
+</body>
+</html>
