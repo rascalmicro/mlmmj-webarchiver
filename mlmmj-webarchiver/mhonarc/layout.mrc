@@ -311,3 +311,8 @@
 <li><strong>$SUBJECT$</strong>,
 <em>$FROMNAME$</em>, $MSGLOCALDATE(CUR;%Y-%m-%d %H:%M)$
 </TTopBegin>
+
+<TSingleTxt>
+<li><strong>$SUBJECT$</strong>,
+<em>$FROMNAME$</em>, $MSGLOCALDATE(CUR;%d.%m %H:%M)$
+</TSingleTxt>
