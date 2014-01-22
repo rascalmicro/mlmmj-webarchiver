@@ -7,7 +7,7 @@ request it (you may also give example code and stuff if you want!)
 - also you may clean up the code ;)
 
 Examples:
-  http://www.csync.org/archive/
+  http://www.cmocka.org/archive/
   http://www.libssh.org/archive/
 
 But anyway, this is how it works (for now):
@@ -29,6 +29,11 @@ control/webarchiveprotected = file
    the archive will be protected by htaccess - so check if your server
    allows the usage of .htaccess files!)
 
+I suggest to run mlmmj-webarchiver by cron.d every 10 minutes.
+
+So create /etc/cron.d/mlmmj-webarchiver with the following content:
+    MAILTO=root
+    */10 * * * * root /usr/bin/mlmmj-webarchiver.sh 2>/dev/null
 
 IMPORTANT!!!
 -------------
@@ -44,4 +49,5 @@ Most of them should be avaiable on every linux (and maybe bsd) box...
 If you have any problems, feel free to give a shout and report bugs!
 
 Thanks,
-Andreas Schneider <mail@cynapses.org>
+
+Andreas Schneider <asn@cryptomilk.org>
