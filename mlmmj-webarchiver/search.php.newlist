@@ -31,13 +31,13 @@
 		$html=array();
 		$count=0;
 		$maxresults=##MAX_RESULTS##;
-		exec("find -type f -name '0*.html' | xargs egrep -roi '$words' | perl -pe 's/:.*//' | sort | uniq",&$output);
+		exec("find -type f -name '0*.html' | xargs egrep -roi '$words' | perl -pe 's/:.*//' | sort | uniq",$output);
 		while(isset($output[$count]) && $count<$maxresults)
 		{
 			$file=$output[$count++];
 			$content=file_get_contents($file);
 			$matches=array();
-			if (preg_match('/<em>Subject<\/em>: ([^<]*)<\/li>[\S\s]+From<\/em>: ([^<]*)<\/li>[\S\s]+Date<\/em>: ([^<]*)<\/li>/',$content,&$matches))
+			if (preg_match('/<em>Subject<\/em>: ([^<]*)<\/li>[\S\s]+From<\/em>: ([^<]*)<\/li>[\S\s]+Date<\/em>: ([^<]*)<\/li>/',$content,$matches))
 			{
 				$html[]="<li><a href='$file'>$matches[1]</a>, $matches[2], $matches[3]</li>";
 			}

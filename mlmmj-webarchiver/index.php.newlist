@@ -3,7 +3,7 @@ $path = getcwd();
 $mlist = substr(strrchr($path, "/"), 1);
 $handle = @opendir($path) or die("Unable to open $path");
 while($file = readdir($handle)) {
-  if(is_dir($path . "/" . $file) && $file != "." && $file != "..") {
+  if(is_dir($path . "/" . $file) && $file != "." && $file != ".." && $file != "images" && $file != "style") {
     $files[] = $file;
   }
 }
